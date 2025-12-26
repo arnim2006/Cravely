@@ -1,6 +1,6 @@
 # Cravely
 Cravely is a full-stack MERN application that enhances traditional food delivery platforms by introducing a short-video (reels) based food discovery system for restaurants.
-Unlike conventional food apps that rely mainly on static images and menus, FoodReels allows restaurants to showcase their food items through engaging short videos, helping them connect better with customers and promote their dishes more effectively.
+Unlike conventional food apps that rely mainly on static images and menus, Cravely allows restaurants to showcase their food items through engaging short videos, helping them connect better with customers and promote their dishes more effectively.
 
 # 🚀 Key Features
 
