@@ -24,7 +24,7 @@ const UserRegister = () => {
             password
         },
         {
-            withCredentials: true  // for cookies
+            withCredentials: true
         })
 
         console.log(response.data);
