@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 import '../styles/comments-drawer.css';
 
 const formatTimeAgo = (dateString) => {
@@ -36,7 +37,7 @@ const CommentsDrawer = ({ foodId, onClose, onCommentsCountChange }) => {
     let active = true;
     setLoading(true);
 
-    axios.get(`http://localhost:3000/api/comments/${foodId}`, { withCredentials: true })
+    axios.get(`${API_BASE_URL}/api/comments/${foodId}`, { withCredentials: true })
       .then(response => {
         if (active) {
           setComments(response.data.comments || []);
@@ -58,7 +59,7 @@ const CommentsDrawer = ({ foodId, onClose, onCommentsCountChange }) => {
     setSubmitting(true);
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/comments/${foodId}`,
+        `${API_BASE_URL}/api/comments/${foodId}`,
         { text: newComment },
         { withCredentials: true }
       );
@@ -86,7 +87,7 @@ const CommentsDrawer = ({ foodId, onClose, onCommentsCountChange }) => {
     if (!window.confirm("Delete this comment?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/comments/${commentId}`, { withCredentials: true });
+      await axios.delete(`${API_BASE_URL}/api/comments/${commentId}`, { withCredentials: true });
       setComments(prev => prev.filter(c => c._id !== commentId));
       
       // Notify parent to decrement commentsCount

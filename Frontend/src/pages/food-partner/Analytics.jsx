@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../styles/analytics.css';
+import { API_BASE_URL } from '../../config/api';
 
 const Analytics = () => {
   const [stats, setStats] = useState(null);
@@ -12,7 +13,7 @@ const Analytics = () => {
   const fetchAnalytics = () => {
     setLoading(true);
     setError(null);
-    axios.get('http://localhost:3000/api/food-partner/dashboard/analytics', { withCredentials: true })
+    axios.get(`${API_BASE_URL}/api/food-partner/dashboard/analytics`, { withCredentials: true })
       .then(response => {
         setStats(response.data.stats);
         setLoading(false);

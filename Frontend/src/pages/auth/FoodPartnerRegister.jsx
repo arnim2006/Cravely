@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { API_BASE_URL } from '../../config/api';
 
 const FoodPartnerRegister = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const FoodPartnerRegister = () => {
 
     try {
       setError('');
-      const response = await axios.post("http://localhost:3000/api/auth/food-partner/register", {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/food-partner/register`, {
         name: businessName,
         contactName,
         phone,

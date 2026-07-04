@@ -3,6 +3,7 @@ import '../../styles/profile.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../../context/AuthContext'
+import { API_BASE_URL } from '../../config/api'
 
 const Profile = () => {
     const { id } = useParams()
@@ -11,7 +12,7 @@ const Profile = () => {
     const [ videos, setVideos ] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/food-partner/${id}`, { withCredentials: true })
+        axios.get(`${API_BASE_URL}/api/food-partner/${id}`, { withCredentials: true })
             .then(response => {
                 setProfile(response.data.foodPartner)
                 setVideos(response.data.foodPartner.foodItems)
@@ -23,7 +24,7 @@ const Profile = () => {
     const handleDelete = async (foodId) => {
         if (!window.confirm("Are you sure you want to delete this food item?")) return;
         try {
-            await axios.delete(`http://localhost:3000/api/food/${foodId}`, { withCredentials: true });
+            await axios.delete(`${API_BASE_URL}/api/food/${foodId}`, { withCredentials: true });
             setVideos(prev => prev.filter(v => v._id !== foodId));
         } catch (err) {
             alert(err.response?.data?.message || "Failed to delete food item");

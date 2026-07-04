@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const AuthContext = createContext(null);
 
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/me', {
+      const response = await axios.get(`${API_BASE_URL}/api/auth/me`, {
         withCredentials: true,
       });
       setUser(response.data.user);
@@ -31,8 +32,8 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const url = isPartner
-        ? 'http://localhost:3000/api/auth/food-partner/login'
-        : 'http://localhost:3000/api/auth/user/login';
+        ? `${API_BASE_URL}/api/auth/food-partner/login`
+        : `${API_BASE_URL}/api/auth/user/login`;
       const response = await axios.post(url, { email, password }, { withCredentials: true });
       await checkAuth();
       return response.data;
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     setLoading(true);
     try {
-      await axios.get('http://localhost:3000/api/auth/user/logout', {
+      await axios.get(`${API_BASE_URL}/api/auth/user/logout`, {
         withCredentials: true,
       });
     } catch (error) {
