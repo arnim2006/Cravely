@@ -9,11 +9,19 @@ const commentsRoutes = require('./routes/comments.routes');
 const cors = require('cors');
 
 const app = express();
+const allowedOrigins = [
+    'https://cravely-ten.vercel.app'
+];
+
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
         // Allow any local port during development
         if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+            return callback(null, true);
+        }
+        // Allow specific production origins
+        if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
             return callback(null, true);
         }
         return callback(new Error('Not allowed by CORS'), false);
