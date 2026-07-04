@@ -15,15 +15,17 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
+        console.log("Incoming CORS Request Origin:", origin);
         if (!origin) return callback(null, true);
         // Allow any local port during development
         if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
             return callback(null, true);
         }
         // Allow specific production origins
-        if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+        if (allowedOrigins.includes(origin) || origin.includes('vercel.app')) {
             return callback(null, true);
         }
+        console.error("CORS blocked origin:", origin);
         return callback(new Error('Not allowed by CORS'), false);
     },
     credentials: true
