@@ -1,0 +1,11 @@
+{
+  "name": "cravely-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix Backend && npm install --prefix Frontend",
+    "seed": "npm run seed --prefix Backend",
+    "dev": "npx -y concurrently -k -p \"[{name}]\" -n \"Backend,Frontend\" -c \"yellow.bold,cyan.bold\" \"npm run dev --prefix Backend\" \"npm run dev --prefix Frontend\"",
+    "start": "npx -y concurrently -k -p \"[{name}]\" -n \"Backend,Frontend\" -c \"yellow.bold,cyan.bold\" \"npm start --prefix Backend\" \"npm run dev --prefix Frontend\""
+  }
+}

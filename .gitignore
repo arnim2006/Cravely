@@ -1,0 +1,33 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+**/node_modules/
+package-lock.json (exclude if you want, but lockfiles are recommended to commit)
+# Actually, committing package-lock.json is recommended, so we won't ignore it.
+
+# Env files
+.env
+**/.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build output
+dist/
+**/dist/
+out/
+.DS_Store
