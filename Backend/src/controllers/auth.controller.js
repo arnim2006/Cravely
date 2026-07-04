@@ -5,6 +5,12 @@ const foodPartnerModel = require("../models/foodpartner.model")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none'
+};
+
 async function registerUser(req,res){
     const {fullName,email,password}=req.body;  // req.boy is fetching the data from frontend in readable manner
 
@@ -34,7 +40,7 @@ async function registerUser(req,res){
         role: 'user'
     },process.env.JWT_SECRET)
 
-    res.cookie("token",token)
+    res.cookie("token", token, cookieOptions)
 
     // here status code is 201 because new resource create ho raha hai
     res.status(201).json({
@@ -80,7 +86,7 @@ async function loginUser(req, res) {
         role: 'user'
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)  // response ko cookie m store kar rahe hai
+    res.cookie("token", token, cookieOptions)  // response ko cookie m store kar rahe hai
 
     res.status(200).json({
         message: "User logged in successfully",
@@ -95,7 +101,7 @@ async function loginUser(req, res) {
 
 
 function logoutUser(req, res) {
-    res.clearCookie("token");
+    res.clearCookie("token", cookieOptions);
     res.status(200).json({
         message: "User logged out successfully"
     });
@@ -136,7 +142,7 @@ async function registerFoodPartner(req, res) {
         role: 'foodpartner'
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie("token", token, cookieOptions)
 
     res.status(201).json({
         message: "Food partner registered successfully",
@@ -182,7 +188,7 @@ async function loginFoodPartner(req, res) {
         role: 'foodpartner'
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie("token", token, cookieOptions)
 
     res.status(200).json({
         message: "Food partner logged in successfully",
@@ -196,7 +202,7 @@ async function loginFoodPartner(req, res) {
 
 
  function logoutFoodPartner(req, res) {
-    res.clearCookie("token");
+    res.clearCookie("token", cookieOptions);
     res.status(200).json({
         message: "Food partner logged out successfully"
     });
